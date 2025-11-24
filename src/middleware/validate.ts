@@ -15,17 +15,22 @@ export default function validate(schema: SchemaShape) {
       if (schema.body) {
         req.body = await schema.body.parseAsync(req.body);
       }
+
       if (schema.query) {
-        req.query = await schema.query.parseAsync(req.query);
+        // 这里用 any，避免 ParsedQs 类型引用带来的问题
+        req.query = (await schema.query.parseAsync(req.query)) as any;
       }
+
       if (schema.params) {
-        req.params = await schema.params.parseAsync(req.params);
+        // 同理，这里也用 any
+        req.params = (await schema.params.parseAsync(req.params)) as any;
       }
+
       next();
     } catch (err) {
       if (err instanceof ZodError) {
         const msg =
-          (err.issues && err.issues.map(issue => issue.message).join('; ')) ||
+          err.issues?.map(issue => issue.message).join('; ') ||
           '请求参数不合法';
         return next(createError(400, msg));
       }
