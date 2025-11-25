@@ -34,7 +34,7 @@ jobs:
           target: "/project/schedule_log/backend/todo-backend"
           rm: true     # 先把目标目录清空再拷贝，避免旧文件残留
 
-      # 在服务器上执行 docker compose 重建 backend 服务
+      # 在服务器上执行 docker compose 重新构建 backend 服务
       - name: Deploy backend on server
         uses: appleboy/ssh-action@v0.1.7
         with:
