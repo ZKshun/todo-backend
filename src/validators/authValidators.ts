@@ -4,12 +4,12 @@ import { z } from 'zod';
 const usernameSchema = z
   .string()
   .min(3, '用户名至少 3 个字符！')
-  .max(20, '用户名最长 20 个字符');
+  .max(20, '用户名最长 20 个字符！');
 
 const passwordSchema = z
   .string()
   .min(6, '密码至少需要 6 个字符！')
-  .max(100, '密码太长了');
+  .max(100, '密码太长了！');
 
 export const registerSchema = {
   body: z.object({
