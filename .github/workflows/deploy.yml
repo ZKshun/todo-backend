@@ -10,6 +10,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Print host
+        run: |
+          echo "SERVER_HOST=>>>${{ secrets.SERVER_HOST }}<<<"
+          echo "${{ secrets.SERVER_HOST }}" | od -An -t x1
+
+      - name: Show workflow file info
+        run: |
+          echo "This workflow file should be .github/workflows/deploy-backend.yml"
+
       - name: Checkout code
         uses: actions/checkout@v4
 
